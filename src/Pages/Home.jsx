@@ -13,7 +13,7 @@ function Home() {
 
     async function fetchTasks() {
         try {
-            const res = await axios.get("http://localhost:5000/list/dis");
+            const res = await axios.get("https://todo-backend-khgt.onrender.com/list/dis");
             setTasks(res.data);
         } catch (error) {
             console.error("Error fetching tasks:", error);
@@ -25,7 +25,7 @@ function Home() {
         if (!newTask.trim()) return alert("Task cannot be empty!");
 
         try {
-            const res = await axios.post("http://localhost:5000/list/ins", { task: newTask });
+            const res = await axios.post("https://todo-backend-khgt.onrender.com/list/ins", { task: newTask });
             setTasks([...tasks, res.data.data]);
             setNewTask("");
         } catch (error) {
@@ -36,7 +36,7 @@ function Home() {
 
     async function deleteTask(id) {
         try {
-            await axios.delete(`http://localhost:5000/list/del/${id}`);
+            await axios.delete(`https://todo-backend-khgt.onrender.com/list/del/${id}`);
             setTasks(tasks.filter(task => task._id !== id));
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -49,7 +49,7 @@ function Home() {
             if (!editingText.trim()) return alert("Updated task cannot be empty!");
 
             try {
-                const res = await axios.put(`http://localhost:5000/list/upd/${id}`, { task: editingText });
+                const res = await axios.put(`https://todo-backend-khgt.onrender.com/list/upd/${id}`, { task: editingText });
                 setTasks(tasks.map(task => (task._id === id ? res.data.data : task)));
                 setEditingId(null);
                 setEditingText("");
